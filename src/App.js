@@ -1,12 +1,12 @@
 import React from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import { BrowserRouter, Route } from 'react-router-dom'; 
 import './App.css';
 import logo from './logo.svg';
 
 import Home from './components/home/';
 import AddPerson from './components/addPerson'
-import { AnotherPage } from './components/anotherPage'
+import Todos from './components/Todos'
 
 class App extends React.Component {
   constructor(){
@@ -69,13 +69,15 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    // Call HTTP requests from here
-    axios.get('https://jsonplaceholder.typicode.com/todos').then((result) => {
-      console.log("HTTP DATA IS : ", result.data)
-    });
     let people = this.populateList();
     console.log("1. ==================> ", this.state)
     this.setState({...this.state, people})
+    
+    // Should be moved to actions later
+    axios.get('https://jsonplaceholder.typicode.com/todos').then((result) => {
+      let todos = result.data 
+      this.setState({...this.state, todos})
+    });
   }
 
   render() {
@@ -90,8 +92,9 @@ class App extends React.Component {
           </div>
         </Route>
 
-        <Route exact path="/about">
-          <AnotherPage />
+        <Route exact path="/todos">
+          <h1 className="App" >All todos listed here</h1>
+          <Todos todos={this.state.todos}/>
         </Route>
 
       </BrowserRouter>
