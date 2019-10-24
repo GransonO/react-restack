@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { TodoElement } from './todoElement'
 import axios from 'axios';
-import './index.css'
 
 class Todos extends Component{
     state = {
@@ -20,10 +20,7 @@ class Todos extends Component{
         return(
              this.state.todos.map((todo) => {
                  return (
-                    <div className="center">
-                        <h3>{todo.id}</h3>
-                        <p>{todo.title}</p>
-                    </div>
+                    <TodoElement key={todo.id} todo={todo}/>
                  )
              })
         )

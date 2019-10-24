@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { BrowserRouter, Route } from 'react-router-dom'; 
 import './App.css';
 import logo from './logo.svg';
@@ -72,12 +71,6 @@ class App extends React.Component {
     let people = this.populateList();
     console.log("1. ==================> ", this.state)
     this.setState({...this.state, people})
-    
-    // Should be moved to actions later
-    axios.get('https://jsonplaceholder.typicode.com/todos').then((result) => {
-      let todos = result.data 
-      this.setState({...this.state, todos})
-    });
   }
 
   render() {
